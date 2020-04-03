@@ -16,6 +16,14 @@ var setBlocked = function(col, row) {
   $(id).addClass("blocked");
 }
 
+var id2col = function(id) {
+  return id.substring(5,6);
+}
+
+var id2Row = function(id) {
+  return id.substring(7);
+}
+
 var init = function() {
   setValue("a", 1, 8);
   setBlocked("d", 1);
@@ -68,8 +76,15 @@ var init = function() {
       console.log("empty");
       var id = event.currentTarget.id;
       $(this).html("<input class='numberInput' id='"+ id +"-input'></input>");
-
-      $('#'+id+'-input').focus();
+      var input = $('#'+id+'-input');
+      $(input).focus();
+      $(input).blur(function(event) {
+        var targetId = event.currentTarget.parentElement.id;
+        var col = id2col(targetId);
+        var row = id2Row(targetId);
+        var value = event.currentTarget.value;
+        setValue(col, row, value);
+      });
     }
   });
 }
