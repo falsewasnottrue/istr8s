@@ -57,6 +57,21 @@ var init = function() {
   setBlocked("d", 10);
   setBlocked("g", 10);
   setValue("h", 10, 6);
+
+  $('.cell').click(function(event) {
+    console.log("clicked " + this.id);
+    if ($(this).hasClass("blocked")) {
+      console.log("blocked");
+    } else if ($(this).text() != "") {
+      console.log("value set to " + $(this).text());
+    } else {
+      console.log("empty");
+      var id = event.currentTarget.id;
+      $(this).html("<input class='numberInput' id='"+ id +"-input'></input>");
+
+      $('#'+id+'-input').focus();
+    }
+  });
 }
 
 init();

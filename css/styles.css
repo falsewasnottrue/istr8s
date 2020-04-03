@@ -51,3 +51,10 @@ div.blocked {
   background-color: black;
 }
 
+input.numberInput {
+  height: 30px;
+  width: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
