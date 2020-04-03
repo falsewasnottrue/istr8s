@@ -43,5 +43,11 @@ div.cell {
   position: relative;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+div.blocked {
+  background-color: black;
 }
 
