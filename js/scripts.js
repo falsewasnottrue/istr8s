@@ -16,16 +16,30 @@ var setBlocked = function(col, row) {
   $(id).addClass("blocked");
 }
 
-var addToHistory = function(col, row, value) {
-  $('#history').val($('#history').val() + col + "," + row + " -> " + value + "\n");
-}
-
 var id2col = function(id) {
   return id.substring(5,6);
 }
 
 var id2Row = function(id) {
   return id.substring(7);
+}
+
+var addToHistory = function(col, row, value) {
+  $('#history').val($('#history').val() + col + "," + row + " -> " + value + "\n");
+}
+
+var replayStep = function(step) {
+  if (step.length > 0) {
+    console.log("replay " + step);
+  }
+}
+
+var replayHistory = function() {
+  var history = $('#history').val().split("\n");
+  console.log(history.length);
+
+  // init();
+  history.forEach(step => replayStep(step));
 }
 
 var init = function() {
@@ -87,10 +101,16 @@ var init = function() {
         var col = id2col(targetId);
         var row = id2Row(targetId);
         var value = event.currentTarget.value;
-        setValue(col, row, value);
-        addToHistory(col, row, value);
+        if (value.length > 0) {
+          setValue(col, row, value);
+          addToHistory(col, row, value);
+        };
       });
     }
+  });
+
+  $('#replayHistory').click(function() {
+    replayHistory();
   });
 }
 
