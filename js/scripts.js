@@ -16,6 +16,10 @@ var setBlocked = function(col, row) {
   $(id).addClass("blocked");
 }
 
+var addToHistory = function(col, row, value) {
+  $('#history').val($('#history').val() + col + "," + row + " -> " + value + "\n");
+}
+
 var id2col = function(id) {
   return id.substring(5,6);
 }
@@ -84,6 +88,7 @@ var init = function() {
         var row = id2Row(targetId);
         var value = event.currentTarget.value;
         setValue(col, row, value);
+        addToHistory(col, row, value);
       });
     }
   });
