@@ -25,12 +25,20 @@ var id2Row = function(id) {
 }
 
 var addToHistory = function(col, row, value) {
-  $('#history').val($('#history').val() + col + "," + row + " -> " + value + "\n");
+  $('#history').val($('#history').val() + "." + col + "," + row + "," + value + "\n");
 }
 
+
 var replayStep = function(step) {
-  if (step.length > 0) {
-    console.log("replay " + step);
+  if (step.length > 0 && step.substring(0,1) == ".") {
+    // put: .a,1,3
+    var params = step.substring(1).split(",");
+    var col = params[0];
+    var row = params[1];
+    var value = params[2];
+    setValue(col, row, value);
+  } else {
+    console.log("ignored: " + step);
   }
 }
 
