@@ -38,11 +38,19 @@ var replayHistory = function() {
   var history = $('#history').val().split("\n");
   console.log(history.length);
 
-  // init();
+  initBoard();
   history.forEach(step => replayStep(step));
 }
 
-var init = function() {
+var initBoard = function() {
+  // clear everything
+  for (col of ['a','b','c','d','e','f','g','h','i','j']) {
+    console.log(col);
+    for (row = 1; row <= 10; row++) {
+      setValue(col, row, "");
+    }
+  }
+
   setValue("a", 1, 8);
   setBlocked("d", 1);
   setValue("e", 1, 4);
@@ -83,7 +91,9 @@ var init = function() {
   setBlocked("d", 10);
   setBlocked("g", 10);
   setValue("h", 10, 6);
+}
 
+var initFunctions = function() {
   $('.cell').click(function(event) {
     console.log("clicked " + this.id);
     if ($(this).hasClass("blocked")) {
@@ -114,4 +124,5 @@ var init = function() {
   });
 }
 
-init();
+initBoard();
+initFunctions();
